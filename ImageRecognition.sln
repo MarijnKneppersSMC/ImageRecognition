@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageModel", "ImageModel\ImageModel.csproj", "{DC0BCB79-4099-4BE2-90FE-76E0030BAFC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageRecognitionConsole", "ImageRecognitionConsole\ImageRecognitionConsole.csproj", "{B9678A07-C280-4732-A85E-D3C63B7A9CA7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC0BCB79-4099-4BE2-90FE-76E0030BAFC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC0BCB79-4099-4BE2-90FE-76E0030BAFC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC0BCB79-4099-4BE2-90FE-76E0030BAFC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC0BCB79-4099-4BE2-90FE-76E0030BAFC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9678A07-C280-4732-A85E-D3C63B7A9CA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9678A07-C280-4732-A85E-D3C63B7A9CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9678A07-C280-4732-A85E-D3C63B7A9CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9678A07-C280-4732-A85E-D3C63B7A9CA7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {377F8EE6-8388-4371-9EBE-0409CA8AD319}
+	EndGlobalSection
+EndGlobal
