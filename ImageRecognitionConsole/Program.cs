@@ -40,7 +40,7 @@ namespace ImagerecognitionConsole
             {
                 StringBuilder sb = new StringBuilder($"{results[i].Item1}: {results[i].Item2.PredictedLabel}");
 
-                if (results[i].Item2.Score.Length > 0)
+                if (results[i].Item2.Score != null)
                 {
                     for (int j = 0; j < results[i].Item2.Score.Length; j++)
                     {
