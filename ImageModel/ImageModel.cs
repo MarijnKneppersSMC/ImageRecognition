@@ -5,16 +5,18 @@ namespace ImageModel
     public partial class ImageModelHandler
     {
 
-        public static ModelOutput PredictFile(string path)
+        public static PredictionResult PredictFile(string path)
         {
 
             string fullPath = Path.GetFullPath(path);
 
             if (!File.Exists(fullPath))
             {
-                return new ModelOutput()
+                return new PredictionResult()
                 {
-                    PredictedLabel = "failure",
+                    predictedLabel = PredictedLabel.FAILURE,
+                    path = fullPath,
+                    reason = "File not found"
                 };
             }
 
@@ -27,21 +29,32 @@ namespace ImageModel
 
             ModelOutput output = Predict(modelInput);
 
-            return output;
+            Enum.TryParse(typeof(PredictedLabel), output.PredictedLabel, true, out object predictedLabel);
+
+            PredictionResult result = new PredictionResult()
+            {
+                path = fullPath,
+                scores = output.Score,
+                predictedLabel = (PredictedLabel)predictedLabel
+            };
+
+            return result;
         }
 
-        public static List<ValueTuple<string, ModelOutput>> PredictDirectory(string path)
+        public static List<PredictionResult> PredictDirectory(string path)
         {
-            List<ValueTuple<string, ModelOutput>> results = new();
+            List<PredictionResult> results = new();
 
             string fullPath = Path.GetFullPath(path);
 
             if (!Directory.Exists(fullPath))
             {
-                results.Add((fullPath, new ModelOutput()
+                results.Add(new PredictionResult()
                 {
-                    PredictedLabel = "failure",
-                }));
+                    predictedLabel = PredictedLabel.FAILURE,
+                    reason = "Directory not found",
+                    path = fullPath
+                });
                 return results;
             }
 
@@ -49,7 +62,7 @@ namespace ImageModel
 
             for (int i = 0; i < files.Length; i++)
             {
-                results.Add((files[i], PredictFile(files[i])));
+                results.Add(PredictFile(files[i]));
             }
 
             return results;

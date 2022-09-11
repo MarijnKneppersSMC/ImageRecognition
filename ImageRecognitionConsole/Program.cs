@@ -1,6 +1,7 @@
 ﻿using static ImageModel.ImageModelHandler;
 using static ImageModel.ImageModel;
 using System.Text;
+using ImageModel;
 
 namespace ImagerecognitionConsole
 {
@@ -9,7 +10,7 @@ namespace ImagerecognitionConsole
 
         public static void Main(string[] args)
         {
-            List<ValueTuple<string, ModelOutput>> results = new();
+            List<PredictionResult> results = new();
 
             if (args.Length == 0)
             {
@@ -23,7 +24,7 @@ namespace ImagerecognitionConsole
             {
                 for (int i = 0; i < args.Length; i++)
                 {
-                    List<ValueTuple<string, ModelOutput>> output = Predict(args[i]);
+                    List<PredictionResult> output = Predict(args[i]);
 
                     for (int j = 0; j < output.Count; j++)
                     {
@@ -38,13 +39,13 @@ namespace ImagerecognitionConsole
 
             for (int i = 0; i < results.Count; i++)
             {
-                StringBuilder sb = new StringBuilder($"{results[i].Item1}: {results[i].Item2.PredictedLabel}");
+                StringBuilder sb = new StringBuilder($"{results[i].path}: {results[i].predictedLabel}");
 
-                if (results[i].Item2.Score != null)
+                if (results[i].scores != null)
                 {
-                    for (int j = 0; j < results[i].Item2.Score.Length; j++)
+                    for (int j = 0; j < results[i].scores.Length; j++)
                     {
-                        sb.Append($", {results[i].Item2.Score[j]}");
+                        sb.Append($", {results[i].scores[j].ToString(System.Globalization.CultureInfo.InvariantCulture)}");
                     }
                 }
 
@@ -53,20 +54,20 @@ namespace ImagerecognitionConsole
 
         }
 
-        static List<ValueTuple<string, ModelOutput>> Predict(string path)
+        static List<PredictionResult> Predict(string path)
         {
-            List<ValueTuple<string, ModelOutput>> output = new();
+            List<PredictionResult> output = new();
 
             string fullPath = Path.GetFullPath(path);
 
             if (File.Exists(fullPath))
             {
-                ModelOutput result = PredictFile(fullPath);
-                output.Add((fullPath, result));
+                PredictionResult result = PredictFile(fullPath);
+                output.Add(result);
             }
             else if (Directory.Exists(fullPath))
             {
-                List<ValueTuple<string, ModelOutput>> results = PredictDirectory(fullPath);
+                List<PredictionResult> results = PredictDirectory(fullPath);
 
                 for (int i = 0; i < results.Count; i++)
                 {
@@ -75,10 +76,12 @@ namespace ImagerecognitionConsole
             }
             else
             {
-                output.Add((fullPath, new ModelOutput()
+                output.Add(new PredictionResult()
                 {
-                    PredictedLabel = "failure",
-                }));
+                    predictedLabel = PredictedLabel.FAILURE,
+                    path = fullPath,
+                    reason = "File not found"
+                });
             }
 
             return output;
