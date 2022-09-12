@@ -39,7 +39,7 @@ namespace ImagerecognitionConsole
 
             for (int i = 0; i < results.Count; i++)
             {
-                StringBuilder sb = new StringBuilder($"{results[i].path}: {results[i].predictedLabel}");
+                StringBuilder sb = new StringBuilder($"{results[i].path}, {results[i].predictedLabel}");
 
                 if (results[i].scores != null)
                 {
@@ -47,6 +47,10 @@ namespace ImagerecognitionConsole
                     {
                         sb.Append($", {results[i].scores[j].ToString(System.Globalization.CultureInfo.InvariantCulture)}");
                     }
+                }
+                else if (results[i].error != null)
+                {
+                    sb.Append($", {results[i].error}");
                 }
 
                 Console.WriteLine(sb.ToString());
@@ -80,7 +84,7 @@ namespace ImagerecognitionConsole
                 {
                     predictedLabel = PredictedLabel.FAILURE,
                     path = fullPath,
-                    reason = "File not found"
+                    error = "File not found"
                 });
             }
 

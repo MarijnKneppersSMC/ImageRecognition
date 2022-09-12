@@ -16,6 +16,6 @@
 
         public float[] scores;
 
-        public string reason;
+        public string error;
     }
 }

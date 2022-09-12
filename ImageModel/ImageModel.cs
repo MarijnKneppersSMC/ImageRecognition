@@ -16,7 +16,7 @@ namespace ImageModel
                 {
                     predictedLabel = PredictedLabel.FAILURE,
                     path = fullPath,
-                    reason = "File not found"
+                    error = "File not found"
                 };
             }
 
@@ -52,7 +52,7 @@ namespace ImageModel
                 results.Add(new PredictionResult()
                 {
                     predictedLabel = PredictedLabel.FAILURE,
-                    reason = "Directory not found",
+                    error = "Directory not found",
                     path = fullPath
                 });
                 return results;
