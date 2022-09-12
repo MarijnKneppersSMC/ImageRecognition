@@ -1,5 +1,4 @@
 ﻿using static ImageModel.ImageModelHandler;
-using static ImageModel.ImageModel;
 using System.Text;
 using ImageModel;
 
