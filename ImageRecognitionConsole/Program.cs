@@ -16,7 +16,6 @@ namespace ImagerecognitionConsole
             {
                 Console.WriteLine("No command line arguments given. Please provide a file or folder path.");
                 string path = Console.ReadLine();
-                Predict(path);
 
                 results = Predict(path);
             }
