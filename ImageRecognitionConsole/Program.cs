@@ -7,16 +7,20 @@ namespace ImagerecognitionConsole
     public class Program
     {
 
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
             List<PredictionResult> results = new();
 
             if (args.Length == 0)
             {
+#if DEBUG
                 Console.WriteLine("No command line arguments given. Please provide a file or folder path.");
                 string path = Console.ReadLine();
 
                 results = Predict(path);
+#elif RELEASE
+                return 1;
+#endif
             }
             else
             {
@@ -53,6 +57,8 @@ namespace ImagerecognitionConsole
 
                 Console.WriteLine(sb.ToString());
             }
+
+            return 0;
 
         }
 
