@@ -22,7 +22,7 @@ Here, `PREDICTED_LABEL` should be replaced with the stringified enum.
 This enum can either be WOLF, CAR or FAILURE. Failure is all encompassing for every possible failure.
 The third variable depends on the predicted label. When the predicted label is FAILURE, this will be a string explaining the failure.
 Otherwise, the third and fourth variable are the scores for the predictions in the order `wolf-car` where the scores are floating point integers.
-So in the end, these are all the possible outputs:
+So in the end, these are all the possible outputs:  
 ``FULL_PATH, FAILURE, REASON``  
 ``FULL_PATH, PREDICTED_LABEL, WOLF_SCORE, CAR_SCORE``
 
