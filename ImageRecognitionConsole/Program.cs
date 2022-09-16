@@ -43,16 +43,16 @@ namespace ImagerecognitionConsole
             {
                 StringBuilder sb = new StringBuilder($"{results[i].path}, {results[i].predictedLabel}");
 
-                if (results[i].scores != null)
+                if (results[i].predictedLabel == PredictedLabel.FAILURE)
+                {
+                    sb.Append($", {results[i].error}");
+                }
+                else
                 {
                     for (int j = 0; j < results[i].scores.Length; j++)
                     {
                         sb.Append($", {results[i].scores[j].ToString(System.Globalization.CultureInfo.InvariantCulture)}");
                     }
-                }
-                else if (results[i].error != null)
-                {
-                    sb.Append($", {results[i].error}");
                 }
 
                 Console.WriteLine(sb.ToString());
