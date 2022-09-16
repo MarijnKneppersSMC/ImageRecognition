@@ -51,6 +51,7 @@ namespace ImagerecognitionConsole
                 {
                     for (int j = 0; j < results[i].scores.Length; j++)
                     {
+                        // The globalization part in the ToString() function so that floats are logged with a dot instead of a comma. For example: "1,0000743" becomes "1.0000743"
                         sb.Append($", {results[i].scores[j].ToString(System.Globalization.CultureInfo.InvariantCulture)}");
                     }
                 }
